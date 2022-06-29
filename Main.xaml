@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1150,884</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>624,884</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="68">
@@ -84,7 +84,7 @@
       <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="Process Name: Journal Bot&#xA;Description:&#xA;*Bot prompts user to select GRC input file.&#xA;*Reads input file and validates data for SME inputs and credit/debit variations, resultant data is submitted for further processing.&#xA;*Logs into Sandbox&#xA;*Creates new journals in sandbox&#xA;*Updates status in Excel&#xA;*Sends mail to SME with Excel attachment" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="634,819.333333333333" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="Process Name: Journal Bot&#xA;Description:&#xA;*Bot prompts user to select GRC input file.&#xA;*Read input file and validates data for SME inputs and credit/debit variations, resultant data is submitted for further processing.&#xA;*Logs into Sandbox&#xA;*Creates new journals in sandbox&#xA;*Updates status in Excel&#xA;*Sends mail to SME with Excel attachment" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="634,819.333333333333" sap2010:WorkflowViewState.IdRef="StateMachine_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -539,12 +539,8 @@
                                     </ui:AddLogFields>
                                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ReadGRC workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="WorkFlows\ReadGRC.xaml">
                                       <ui:InvokeWorkflowFile.Arguments>
-                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                                          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-                                        </InArgument>
-                                        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtRawGRC">
-                                          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtRawGRC" />
-                                        </OutArgument>
+                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                                        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtRawGRC">[dtRawGRC]</OutArgument>
                                       </ui:InvokeWorkflowFile.Arguments>
                                     </ui:InvokeWorkflowFile>
                                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CreditDebitValidation workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_33" UnSafe="False" WorkflowFileName="WorkFlows\CreditDebitValidation.xaml">

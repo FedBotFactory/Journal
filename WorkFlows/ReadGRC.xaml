@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ReadGRC" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ReadGRC" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="out_dtRawGRC" Type="OutArgument(sd:DataTable)" />
@@ -6,7 +6,7 @@
   <this:ReadGRC.in_Config>
     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
   </this:ReadGRC.in_Config>
-  <sap:VirtualizedContainerService.HintSize>1153.33333333333,1744.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1150,1806</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
@@ -72,7 +72,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="1.Read GRC File&#xA;2.Status Check&#xA;3.Filter Approved status rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,1680" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="1. Read GRC File&#xA;2. Status Check&#xA;3. Filter Approved status rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,1741.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strFilePathGRC" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtApprovedGRC" />
@@ -85,24 +85,20 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke BrowseFile workflow" sap:VirtualizedContainerService.HintSize="484,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="WorkFlows\BrowseFile.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-        </InArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_strFilePathGRC">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strFilePathGRC" />
-        </OutArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_strFilePathGRC">[strFilePathGRC]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dtRawGRC]" DisplayName="Read GRC" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[in_Config(&quot;SheetName_InputGRC&quot;).ToString]" WorkbookPath="[strFilePathGRC]" />
-    <If Condition="[out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotStatus&quot;).ToString)]" DisplayName="Check Column -  Bot Status " sap:VirtualizedContainerService.HintSize="484,354" sap2010:WorkflowViewState.IdRef="If_1">
-      <If.Else>
-        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotStatus&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotStatus Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_5" />
-      </If.Else>
+    <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotStatus&quot;).ToString)]" DisplayName="Check Column -  Bot Status " sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotStatus&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotStatus Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_7" />
+      </If.Then>
     </If>
-    <If Condition="[out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotComments&quot;).ToString)]" DisplayName="Check Column -  Bot Comments" sap:VirtualizedContainerService.HintSize="484,354" sap2010:WorkflowViewState.IdRef="If_2">
-      <If.Else>
-        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotComments&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotComments Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_6" />
-      </If.Else>
+    <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotComments&quot;).ToString)]" DisplayName="Check Column -  Bot Comments" sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotComments&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotComments Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_8" />
+      </If.Then>
     </If>
     <ui:FilterDataTable DataTable="[out_dtRawGRC]" DisplayName="Filter Approved Status &amp; Bot Status" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtApprovedGRC]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
