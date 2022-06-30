@@ -2,11 +2,15 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="out_dtRawGRC" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_strFilePathGRC" Type="InArgument(x:String)" />
   </x:Members>
   <this:ReadGRC.in_Config>
     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
   </this:ReadGRC.in_Config>
-  <sap:VirtualizedContainerService.HintSize>1150,1806</sap:VirtualizedContainerService.HintSize>
+  <this:ReadGRC.in_strFilePathGRC>
+    <InArgument x:TypeArguments="x:String" />
+  </this:ReadGRC.in_strFilePathGRC>
+  <sap:VirtualizedContainerService.HintSize>1150,2110</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
@@ -69,12 +73,11 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="1. Read GRC File&#xA;2. Status Check&#xA;3. Filter Approved status rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,1741.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="1. Read GRC input File&#xA;2. Check Status&#xA;3. Filter Approved status rows&#xA;4. Add 'Bot Status', 'Bot Comments' and 'TimeStamp' Columns if doesn't exist&#xA;5  Proceed futher if 'Bot Status' is empty for any of the rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,2045.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="strFilePathGRC" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtApprovedGRC" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -83,13 +86,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke BrowseFile workflow" sap:VirtualizedContainerService.HintSize="484,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="WorkFlows\BrowseFile.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_strFilePathGRC">[strFilePathGRC]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dtRawGRC]" DisplayName="Read GRC" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[in_Config(&quot;SheetName_InputGRC&quot;).ToString]" WorkbookPath="[strFilePathGRC]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dtRawGRC]" DisplayName="Read GRC" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[in_Config(&quot;SheetName_InputGRC&quot;).ToString]" WorkbookPath="[in_strFilePathGRC]" />
     <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotStatus&quot;).ToString)]" DisplayName="Check Column -  Bot Status " sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotStatus&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotStatus Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_7" />
@@ -98,6 +95,11 @@
     <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotComments&quot;).ToString)]" DisplayName="Check Column -  Bot Comments" sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotComments&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotComments Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_8" />
+      </If.Then>
+    </If>
+    <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotTimeStamp&quot;).ToString)]" DisplayName="Check Column -  TimeStamp" sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_4">
+      <If.Then>
+        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotTimeStamp&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add 'TimeStamp' Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_9" />
       </If.Then>
     </If>
     <ui:FilterDataTable DataTable="[out_dtRawGRC]" DisplayName="Filter Approved Status &amp; Bot Status" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtApprovedGRC]" SelectColumnsMode="Keep">
