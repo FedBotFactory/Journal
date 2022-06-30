@@ -43,7 +43,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="54">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -71,7 +71,6 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="1. Handles all security warnings dynamically.&#xA;2. Loop will be exited when Oracle Workbench appears.&#xA;3. Closes Invoice Workbench after appearing." DisplayName="HandleSecurityWarnings" sap:VirtualizedContainerService.HintSize="1501.33333333333,1857.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -79,6 +78,7 @@
       <Variable x:TypeArguments="x:Boolean" Name="blnExitLoop" />
       <Variable x:TypeArguments="x:Boolean" Name="blnInvoiceWorkbenchLoaded" />
       <Variable x:TypeArguments="ui:UiElement" Name="TreasuryConfirmation" />
+      <Variable x:TypeArguments="ui:UiElement" Name="OracleAppsEBSDB" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -219,9 +219,9 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InterruptibleDoWhile>
-    <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Treasury Confirmation displayed?" FoundElement="[TreasuryConfirmation]" sap:VirtualizedContainerService.HintSize="1459.33333333333,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_1">
+    <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Oracle Applications - EBSDB displayed?" FoundElement="[OracleAppsEBSDB]" sap:VirtualizedContainerService.HintSize="1459.33333333333,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_1">
       <ui:WaitUiElementAppear.Target>
-        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d83a4f3d-6f6d-491f-a23a-6749bcc94717" InformativeScreenshot="ed31357f888bda2acfeb19daf316d570" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Treasury Confirmation and Reconciliation *' role='internal frame' /&gt;&lt;java name='Treasury Confirmation and Reconciliation *' role='label' /&gt;">
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d83a4f3d-6f6d-491f-a23a-6749bcc94717" InformativeScreenshot="d7bbff8bba0f420771c8c06b44b8786a" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java cls='Proxy' role='panel' /&gt;">
           <ui:Target.TimeoutMS>
             <InArgument x:TypeArguments="x:Int32" />
           </ui:Target.TimeoutMS>
@@ -231,11 +231,11 @@
         </ui:Target>
       </ui:WaitUiElementAppear.Target>
     </ui:WaitUiElementAppear>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1459.33333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[IsNothing(TreasuryConfirmation)]" />
-    <If Condition="[IsNothing(TreasuryConfirmation)]" DisplayName="if Treasury Confirmation not displayed" sap:VirtualizedContainerService.HintSize="1459.33333333333,254.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[IsNothing(OracleAppsEBSDB)]" DisplayName="If Oracle Applications EBSDB not displayed?" sap:VirtualizedContainerService.HintSize="1459.33333333333,254.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Throw DisplayName="Treasury Confrmation not displayed" Exception="[New SystemException (in_Config(&quot;SE_ErrMsg_TreasuryConfirmationNotDisplayed&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
+        <Throw DisplayName="Oracle Apps EBSDB not displayed" Exception="[New SystemException (in_Config(&quot;SE_ErrMsg_OracleAppsEBSDBNotDisplayed&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
       </If.Then>
     </If>
+    <ui:LogMessage DisplayName="Init - HandleSecurityWarnings - Success" sap:VirtualizedContainerService.HintSize="1459.33333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[in_Config(&quot;Log_HandleSecurityWarnings_Success&quot;).ToString]" />
   </Sequence>
 </Activity>

@@ -10,7 +10,7 @@
   <this:ReadGRC.in_strFilePathGRC>
     <InArgument x:TypeArguments="x:String" />
   </this:ReadGRC.in_strFilePathGRC>
-  <sap:VirtualizedContainerService.HintSize>1150,2110</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1150,1685.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
@@ -76,7 +76,7 @@
       <AssemblyReference>NPOI</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="1. Read GRC input File&#xA;2. Check Status&#xA;3. Filter Approved status rows&#xA;4. Add 'Bot Status', 'Bot Comments' and 'TimeStamp' Columns if doesn't exist&#xA;5  Proceed futher if 'Bot Status' is empty for any of the rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,2045.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="1. Read GRC input File&#xA;2. Check Status&#xA;3. Filter Approved status rows&#xA;4. Add 'Bot Status', 'Bot Comments' and 'TimeStamp' Columns if doesn't exist&#xA;5  Proceed futher if 'Bot Status' is empty for any of the rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,1620.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtApprovedGRC" />
     </Sequence.Variables>
@@ -95,11 +95,6 @@
     <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotComments&quot;).ToString)]" DisplayName="Check Column -  Bot Comments" sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotComments&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add BotComments Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_8" />
-      </If.Then>
-    </If>
-    <If Condition="[not out_dtRawGRC.Columns.Contains(in_Config(&quot;ColName_BotTimeStamp&quot;).ToString)]" DisplayName="Check Column -  TimeStamp" sap:VirtualizedContainerService.HintSize="484,384.666666666667" sap2010:WorkflowViewState.IdRef="If_4">
-      <If.Then>
-        <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_Config(&quot;ColName_BotTimeStamp&quot;).ToString]" DataTable="[out_dtRawGRC]" DisplayName="Add 'TimeStamp' Column" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_9" />
       </If.Then>
     </If>
     <ui:FilterDataTable DataTable="[out_dtRawGRC]" DisplayName="Filter Approved Status &amp; Bot Status" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtApprovedGRC]" SelectColumnsMode="Keep">

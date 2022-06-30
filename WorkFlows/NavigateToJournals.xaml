@@ -6,7 +6,7 @@
   <this:NavigateToJournals.in_Config>
     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
   </this:NavigateToJournals.in_Config>
-  <sap:VirtualizedContainerService.HintSize>592,1322</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1150,1456.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -67,14 +67,17 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Navigate to Journals" sap:VirtualizedContainerService.HintSize="602,1257.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Navigate to Journals" sap:VirtualizedContainerService.HintSize="602,1392" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log - Navigate to Journals" sap:VirtualizedContainerService.HintSize="560,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;Log_NavigateToJournals&quot;).ToString]" />
     <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach - Home Page" sap:VirtualizedContainerService.HintSize="560,1165.33333333333" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="32155878b86639bb5c293390b890e369" Selector="&lt;html app='msedge.exe' title='Home' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -92,7 +95,7 @@
             </sap:WorkflowViewStateService.ViewState>
             <ui:UiElementExists DisplayName="General Ledger Super User Displayed?" Exists="[blnGeneralLedgerSuperUserDisplayed]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="1f883905-7860-4689-bb04-14b39462bed6" InformativeScreenshot="0b9c7ad33faec8409a0afdea3ef9c9cd" Selector="[String.Format(&quot;&lt;webctrl aaname='{0}' parentid='66690:101:-1:0:mainMenuRESTnCtS9sv7' tableCol='1' tableRow='1' tag='DIV' /&gt;&quot;, in_Responsibility)]" WaitForReady="INTERACTIVE">
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="1f883905-7860-4689-bb04-14b39462bed6" InformativeScreenshot="0b9c7ad33faec8409a0afdea3ef9c9cd" Selector="[String.Format(&quot;&lt;webctrl aaname='{0}' omit:parentid='66690:101:-1:0:mainMenuREST4hFJXD-U' omit:tableCol='1' omit:tableRow='1' tag='DIV' /&gt;&quot;, in_Responsibility)]" WaitForReady="INTERACTIVE">
                   <ui:Target.TimeoutMS>
                     <InArgument x:TypeArguments="x:Int32" />
                   </ui:Target.TimeoutMS>
@@ -104,7 +107,7 @@
                 <Throw DisplayName="General Ledger Super User Not Available" Exception="[New SystemException (in_Config(&quot;SE_ErrMsg_GeneralLedgerSuperUserNotDisplayed&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
               </If.Then>
               <If.Else>
-                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence sap:VirtualizedContainerService.HintSize="200,84.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -131,7 +134,7 @@
                   </ui:CursorPosition>
                 </ui:Click.CursorPosition>
                 <ui:Click.Target>
-                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="564726fb-48c7-471e-a5d1-6c8bf8d0286b" InformativeScreenshot="8552969d614e8863d999c6aa3f9bfd15" Selector="&lt;webctrl aaname='DOL General Ledger Super User' parentid='*' tag='DIV' /&gt;" WaitForReady="INTERACTIVE">
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="564726fb-48c7-471e-a5d1-6c8bf8d0286b" InformativeScreenshot="8552969d614e8863d999c6aa3f9bfd15" Selector="[String.Format(&quot;&lt;webctrl aaname='{0}' omit:parentid='66690:101:-1:0:mainMenuREST4hFJXD-U' omit:tableCol='1' omit:tableRow='1' tag='DIV' /&gt;&quot;, in_Responsibility)]" WaitForReady="INTERACTIVE">
                     <ui:Target.TimeoutMS>
                       <InArgument x:TypeArguments="x:Int32" />
                     </ui:Target.TimeoutMS>
