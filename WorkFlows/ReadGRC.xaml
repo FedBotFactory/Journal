@@ -74,6 +74,7 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="1. Read GRC input File&#xA;2. Check Status&#xA;3. Filter Approved status rows&#xA;4. Add 'Bot Status', 'Bot Comments' and 'TimeStamp' Columns if doesn't exist&#xA;5  Proceed futher if 'Bot Status' is empty for any of the rows" DisplayName="ReadGRC" sap:VirtualizedContainerService.HintSize="526,1620.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -123,7 +124,7 @@
     </ui:FilterDataTable>
     <If Condition="[dtApprovedGRC.Rows.Count = 0]" DisplayName="If No Rows Found" sap:VirtualizedContainerService.HintSize="484,254.666666666667" sap2010:WorkflowViewState.IdRef="If_3">
       <If.Then>
-        <Throw DisplayName="NoRows - Initial check" Exception="[New SystemException(in_Config(&quot;ErrMsg_NoData_ApprovalDeclinedorBotUnprocessed&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        <Throw DisplayName="NoRows - Initial check" Exception="[New SystemException(in_Config(&quot;SE_ErrMsg_NoData_ApprovalDeclinedorBotUnprocessed&quot;).ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
       </If.Then>
       <If.Else>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
