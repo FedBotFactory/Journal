@@ -81,6 +81,8 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="835.333333333333,2470.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -92,7 +94,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="793.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;Log_ProcessStart&quot;).ToString]" />
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="793.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;Log_NewJournal&quot;).ToString]" />
     <ui:FilterDataTable DataTable="[in_dtMainGRC]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="793.333333333333,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtBatchGRC]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
@@ -115,7 +117,7 @@
     <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="793.333333333333,372.666666666667" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[CInt(in_Config(&quot;RetryNum_ClickNewJournal&quot;).ToString)]" RetryInterval="[TimeSpan.FromSeconds(CInt(in_Config(&quot;RetryInterval_ClickNewJournal&quot;).ToString))]">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click New Journal" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'New Journal'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
             <ui:Click.CursorPosition>
               <ui:CursorPosition Position="Center">
                 <ui:CursorPosition.OffsetX>
@@ -159,7 +161,7 @@
         </ActivityFunc>
       </ui:RetryScope.Condition>
     </ui:RetryScope>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtBatchGRC]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="793.333333333333,1336.66666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtBatchGRC]" DisplayName="For Each Row in GRC Data Table" sap:VirtualizedContainerService.HintSize="793.333333333333,1336.66666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -187,7 +189,7 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="717.333333333333,436.666666666667" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign DisplayName="Assign Multiple Variables to Excel Columns" sap:VirtualizedContainerService.HintSize="717.333333333333,436.666666666667" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -211,7 +213,7 @@
                       <OutArgument x:TypeArguments="x:String">[strAccount]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_AccountingLineTo").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_AccountingLineTo").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -219,7 +221,7 @@
                       <OutArgument x:TypeArguments="x:String">[strDebit]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_FromDr").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromDr").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -227,7 +229,7 @@
                       <OutArgument x:TypeArguments="x:String">[strCredit]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_FromCr").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromCr").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -259,7 +261,7 @@
                       <OutArgument x:TypeArguments="x:String">[strCategory]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_FromCategory").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromCategory").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -267,7 +269,7 @@
                       <OutArgument x:TypeArguments="x:String">[strPeriod]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_PeriodName").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_PeriodName").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
@@ -275,7 +277,7 @@
                       <OutArgument x:TypeArguments="x:String">[strDefaultEffectiveDate]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_DefaultEffectiveDate").ToString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_DefaultEffectiveDate").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
@@ -283,12 +285,13 @@
                       <OutArgument x:TypeArguments="x:String">[strCurrency]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[in_Config("Journal_Currency").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_Currency").ToString).ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
+            <ui:LogMessage DisplayName="Log - Default Effective Date" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[in_Config(&quot;Log_DefaultEffectiveDate&quot;).ToString+ strDefaultEffectiveDate]" />
             <Assign DisplayName="Convert Default date to Effective date" sap:VirtualizedContainerService.HintSize="717.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_1">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[strEffectiveDate]</OutArgument>
@@ -297,9 +300,8 @@
                 <InArgument x:TypeArguments="x:String">[Convert.ToDateTime(strDefaultEffectiveDate).ToString("dd-MMM-yyyy")]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[in_Config(&quot;Log_DefaultEffectiveDate&quot;).ToString+ strDefaultEffectiveDate]" />
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[in_Config(&quot;Log_EffectiveDate&quot;).ToString + strEffectiveDate]" />
-            <If Condition="[strIndex=&quot;0&quot;]" sap:VirtualizedContainerService.HintSize="717.333333333333,278" sap2010:WorkflowViewState.IdRef="If_1">
+            <ui:LogMessage DisplayName="Log - Effective Date" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[in_Config(&quot;Log_EffectiveDate&quot;).ToString + strEffectiveDate]" />
+            <If Condition="[strIndex=&quot;0&quot;]" DisplayName="If Index is &quot;0&quot;" sap:VirtualizedContainerService.HintSize="717.333333333333,278" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke EnterNewDOLLedgerFields workflow" sap:VirtualizedContainerService.HintSize="337.333333333333,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="WorkFlows\EnterNewDOLLedgerFields.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
@@ -315,6 +317,7 @@
                     <InArgument x:TypeArguments="x:String" x:Key="in_strCurrency">[strCurrency]</InArgument>
                     <InArgument x:TypeArguments="x:String" x:Key="in_strBatchNameFrom">[strBatchNameFrom]</InArgument>
                     <InArgument x:TypeArguments="x:String" x:Key="in_strPeriod">[strPeriod]</InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </If.Then>
