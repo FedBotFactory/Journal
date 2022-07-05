@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="EnterNewDOLLedgerFields" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="EnterNewDOLLedgerFields" this:EnterNewDOLLedgerFields.in_strDebit="27.22" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_strLine" Type="InArgument(x:String)" />
     <x:Property Name="in_strAccount" Type="InArgument(x:String)" />
@@ -14,18 +14,6 @@
     <x:Property Name="in_strPeriod" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <this:EnterNewDOLLedgerFields.in_strLine>
-    <InArgument x:TypeArguments="x:String" />
-  </this:EnterNewDOLLedgerFields.in_strLine>
-  <this:EnterNewDOLLedgerFields.in_strAccount>
-    <InArgument x:TypeArguments="x:String" />
-  </this:EnterNewDOLLedgerFields.in_strAccount>
-  <this:EnterNewDOLLedgerFields.in_strDebit>
-    <InArgument x:TypeArguments="x:String" />
-  </this:EnterNewDOLLedgerFields.in_strDebit>
-  <this:EnterNewDOLLedgerFields.in_strCredit>
-    <InArgument x:TypeArguments="x:String" />
-  </this:EnterNewDOLLedgerFields.in_strCredit>
   <this:EnterNewDOLLedgerFields.in_strIndex>
     <InArgument x:TypeArguments="x:String" />
   </this:EnterNewDOLLedgerFields.in_strIndex>
@@ -53,7 +41,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1150,2086</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1150,2166</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>EnterNewDOLLedgerFields_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -85,6 +73,8 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Platform.Triggers</x:String>
+      <x:String>UiPath.Platform.Triggers.Scope</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -116,10 +106,10 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
-      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="1. Enter Journal Main Block Fields&#xA;2. Enter Journal Primry Rows" DisplayName="EnterNewDOLLedgerFields" sap:VirtualizedContainerService.HintSize="418,2021.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="1. Enter Journal Main Block Fields&#xA;2. Enter Journal Primry Rows" DisplayName="EnterNewDOLLedgerFields" sap:VirtualizedContainerService.HintSize="418,2101.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -137,15 +127,15 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_strCurrency">[in_strCurrency]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Sequence DisplayName="EnterPrimaryRows" sap:VirtualizedContainerService.HintSize="376,1730" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="EnterPrimaryRows" sap:VirtualizedContainerService.HintSize="376,1810" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log- EnterPrimaryRows" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[in_Config(&quot;Log_EnterPrimaryRows&quot;).ToString]" />
-      <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'Line'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:LogMessage DisplayName="Log- EnterPrimaryRows" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[in_Config(&quot;Log_EnterPrimaryRows&quot;).ToString]" />
+      <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click LIne" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
         <ui:Click.CursorPosition>
           <ui:CursorPosition Position="Center">
             <ui:CursorPosition.OffsetX>
@@ -157,85 +147,94 @@
           </ui:CursorPosition>
         </ui:Click.CursorPosition>
         <ui:Click.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d873ca13-c55c-4b8c-8cc1-6de686e4ce42" InformativeScreenshot="228e1cf60bbd399f5efb6455a48dbf8b" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) -*' role='internal frame' /&gt;&lt;java name='Line Required' role='text' /&gt;" WaitForReady="INTERACTIVE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5fc214f6-9327-4b8e-963b-c7846200fb75" InformativeScreenshot="88c94180fc3f784683c311dc6dd0ff02" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) -*' role='internal frame' /&gt;&lt;java name='Line Required' role='text' /&gt;">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
           </ui:Target>
         </ui:Click.Target>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
       </ui:Click>
-      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Line" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" SimulateType="True" Text="[in_strLine]">
+      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Line" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_13" SimulateType="True" Text="[in_strLine]">
         <ui:TypeInto.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bf746b06-9733-4833-af30-4207a9844e4b" InformativeScreenshot="a773dca1ab960f2c6882f33b2f48ae67" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Line* Required' role='text' idx='1' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9f3d853e-afcb-4171-841e-0fb4f9ddcb3d" InformativeScreenshot="88c94180fc3f784683c311dc6dd0ff02" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Line* Required' role='text' idx='1' /&gt;">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
           </ui:Target>
         </ui:TypeInto.Target>
       </ui:TypeInto>
-      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press Tab Key" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press tab key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
         <ui:SendHotkey.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" WaitForReady="INTERACTIVE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="64f313efe3ba4defa4f2ef2e88e866c5" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Line* Required' role='text' idx='1' /&gt;" WaitForReady="INTERACTIVE">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
           </ui:Target>
         </ui:SendHotkey.Target>
       </ui:SendHotkey>
-      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Account" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_3" SimulateType="True" Text="[in_strAccount]">
+      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Account" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_14" SimulateType="True" Text="[in_strAccount]">
         <ui:TypeInto.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a333294d-54a3-40b0-a02d-bf10b50c6315" InformativeScreenshot="51b1a3b6743a1a392684e3ac1e5ea80a" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) *' role='internal frame' /&gt;&lt;java name='Account RequiredList of Values' role='text' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d6696f76-ebab-4d7d-9710-b00ffebf4c5e" InformativeScreenshot="5aee9f93f0438a0da0f7eb4ea3195bbd" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) *' role='internal frame' /&gt;&lt;java name='Account RequiredList of Values' role='text' /&gt;">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
           </ui:Target>
         </ui:TypeInto.Target>
       </ui:TypeInto>
-      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press Tab Key" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press tab key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
         <ui:SendHotkey.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" WaitForReady="INTERACTIVE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="ad40a869832005f47c09fa9435c96536" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) *' role='internal frame' /&gt;&lt;java name='Account RequiredList of Values' role='text' /&gt;" WaitForReady="INTERACTIVE">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
           </ui:Target>
         </ui:SendHotkey.Target>
       </ui:SendHotkey>
-      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Debit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" SimulateType="True" Text="[in_strCredit]">
+      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Debit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_15" SimulateType="True" Text="[in_strCredit]">
         <ui:TypeInto.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="93694f76-c31b-4a3b-ab6f-cde297baa142" InformativeScreenshot="ed5abd551706bc9d990326f0dcebef33" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='*Entered: Debit Required' role='text' idx='1' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fb85fa12-2520-42a3-b81c-3867e2ef881d" InformativeScreenshot="c0cd8b17023c1786a78ca2ac03d24c1c" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='*Entered: Debit Required' role='text' idx='1' /&gt;">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
           </ui:Target>
         </ui:TypeInto.Target>
       </ui:TypeInto>
-      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Credit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_5" SimulateType="True" Text="[in_strDebit]">
+      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Credit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_16" SimulateType="True" Text="[in_strDebit]">
         <ui:TypeInto.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="61463f9d-ff23-4fb0-8110-babe52c69919" InformativeScreenshot="7ebec10e0cc4c36d0e8189db6d4ab9e7" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Entered: Credit Required' role='text' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7b958873-e755-417b-9435-42a7d70fc4c7" InformativeScreenshot="003fd4f36ce3825cd8a73a13b4f77c99" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Entered: Credit Required' role='text' /&gt;">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
           </ui:Target>
         </ui:TypeInto.Target>
       </ui:TypeInto>
-      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Pres Tab Key" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press tab key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
         <ui:SendHotkey.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" WaitForReady="INTERACTIVE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="6be5109bb7297919ec5b34d40caa5c4f" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Entered: Credit Required' role='text' /&gt;" WaitForReady="INTERACTIVE">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>
           </ui:Target>
         </ui:SendHotkey.Target>
       </ui:SendHotkey>
-      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press Down Key" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="down" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press down key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="down" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
         <ui:SendHotkey.Target>
-          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" WaitForReady="INTERACTIVE">
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="68eb8ba6d77cc17ca0fd44cdd4c4456f" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Description' role='text' /&gt;" WaitForReady="INTERACTIVE">
             <ui:Target.TimeoutMS>
               <InArgument x:TypeArguments="x:Int32" />
             </ui:Target.TimeoutMS>

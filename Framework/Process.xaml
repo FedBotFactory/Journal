@@ -85,7 +85,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="1. Open New Journal&#xD;&#xA;2. Enter all Journal Fields" DisplayName="Process" sap:VirtualizedContainerService.HintSize="835.333333333333,2516" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="1. Open New Journal&#xA;2. Enter all Journal Fields" DisplayName="Process" sap:VirtualizedContainerService.HintSize="835.333333333333,2516" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtBatchGRC" />
     </Sequence.Variables>
@@ -325,12 +325,21 @@
               <If.Else>
                 <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke EnterOtherRows workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="WorkFlows\EnterOtherRows.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_strLine">[strLine]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_strAccount">[strAccount]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_strDebit">[strDebit]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_strCredit">[strCredit]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_strIndex">[strIndex]</InArgument>
-                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strIndex">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strIndex" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strAccount">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strAccount" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strCredit">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strCredit" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strDebit">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strDebit" />
+                    </InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </If.Else>
