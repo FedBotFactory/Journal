@@ -1,0 +1,164 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="EnterOtherRows" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strIndex" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_strAccount" Type="InArgument(x:String)" />
+    <x:Property Name="in_strCredit" Type="InArgument(x:String)" />
+    <x:Property Name="in_strDebit" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>1150,1492</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="32">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Enter Journal Other rows apart from Primary rows" DisplayName="Enter Other Rows" sap:VirtualizedContainerService.HintSize="376,1427.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_41">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strIdx" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[strIdx]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[(cint(in_strindex)+1).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log - Line Number" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[in_Config(&quot;Log_JELine&quot;).ToString+strIdx]" />
+    <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Account" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_119" SimulateType="True" Text="[in_strAccount]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2e07ad9b-83b4-4913-896f-be312b50e520" InformativeScreenshot="a6b5742ab2111e2c72e77bce39376489" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Lines tab page Account RequiredList of Values' role='text' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press tab Key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_65" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="fdd70e41c3b167ba3c173f23f6e602b4" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Lines tab page Account RequiredList of Values' role='text' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="True" DisplayName="Type Debit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_120" SimulateType="True" Text="[in_strCredit]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="56527052-e22e-4ce9-985c-388224d63e63" InformativeScreenshot="6658e30e02774aa1fe4a71820098b203" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='Lines tab page Entered: Debit Required' role='text' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Credit" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_121" SimulateType="True" Text="[in_strDebit]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="999d7385-bdbe-4e39-a7f5-bf82d9cc439c" InformativeScreenshot="5856828c66e2c876de01bd2fdbdc99af" Selector="[&quot;&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) -*' role='internal frame' /&gt;&lt;java idx='&quot;+strIdx+&quot;' name='Entered: Credit Required' role='text' /&gt;&quot;]">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press tab key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_67" Key="tab" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="9225a09dd2ac17280bbd109acdabd4b3" Selector="[&quot;&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) -*' role='internal frame' /&gt;&lt;java idx='&quot;+strIdx+&quot;' name='Entered: Credit Required' role='text' /&gt;&quot;]">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" Activate="True" DisplayName="Press down key" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_66" Key="down" KeyModifiers="None" SendWindowMessages="True" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="691c34c1-acb4-40cd-980c-1fb2ef96a791" InformativeScreenshot="c9f9bf7e898550cf95590c167e012c23" Selector="[String.Format(&quot;&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java name='*Description' role='text' idx='{0}' /&gt;&quot;, strIdx)]">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+  </Sequence>
+</Activity>

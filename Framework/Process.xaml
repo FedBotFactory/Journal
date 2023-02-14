@@ -1,0 +1,388 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_dtMainGRC" Type="InArgument(sd:DataTable)" />
+  </x:Members>
+  <this:Process.in_dtMainGRC>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Process.in_dtMainGRC>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1150,2580.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="60">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="60">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="1. Open New Journal&#xA;2. Enter all Journal Fields" DisplayName="Process" sap:VirtualizedContainerService.HintSize="835.333333333333,2516" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtBatchGRC" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="793.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_Config(&quot;Log_NewJournal&quot;).ToString]" />
+    <ui:FilterDataTable DataTable="[in_dtMainGRC]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="793.333333333333,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtBatchGRC]" SelectColumnsMode="Keep">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+            <ui:FilterOperationArgument.Column>
+              <InArgument x:TypeArguments="x:String">[in_Config("ColName_BatchNameFrom").ToString]</InArgument>
+            </ui:FilterOperationArgument.Column>
+            <ui:FilterOperationArgument.Operand>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem]</InArgument>
+            </ui:FilterOperationArgument.Operand>
+          </ui:FilterOperationArgument>
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="793.333333333333,372.666666666667" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="[CInt(in_Config(&quot;RetryNum_ClickNewJournal&quot;).ToString)]" RetryInterval="[TimeSpan.FromSeconds(CInt(in_Config(&quot;RetryInterval_ClickNewJournal&quot;).ToString))]">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'New Journal'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b7485246-d7d7-4bb0-9bc3-6650f8fb5488" InformativeScreenshot="463e5917c310498058008817274c0c5c" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Enter Journals (DOL_Ledger)' role='internal frame' /&gt;&lt;java name='New Journal alt J' role='push button' /&gt;" WaitForReady="INTERACTIVE">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
+            </ui:Click.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:Click>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean">
+          <ui:UiElementExists Exists="{x:Null}" DisplayName="Check for Journal Screen" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d3d87c5a-74f1-442f-9d24-eb0cb6cd9b81" InformativeScreenshot="908b10acd7232716a4fbfd31705cb3e4" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) *' role='internal frame' /&gt;&lt;java name='Journal Required' role='text' /&gt;" WaitForReady="INTERACTIVE">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+        </ActivityFunc>
+      </ui:RetryScope.Condition>
+    </ui:RetryScope>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtBatchGRC]" DisplayName="For Each Row in GRC Data Table" sap:VirtualizedContainerService.HintSize="793.333333333333,1336.66666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="759.333333333333,1218" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="strDescription" />
+              <Variable x:TypeArguments="x:String" Name="strLedger" />
+              <Variable x:TypeArguments="x:String" Name="strCategory" />
+              <Variable x:TypeArguments="x:String" Name="strPeriod" />
+              <Variable x:TypeArguments="x:String" Name="strDefaultEffectiveDate" />
+              <Variable x:TypeArguments="x:String" Name="strCurrency" />
+              <Variable x:TypeArguments="x:String" Name="strEffectiveDate" />
+              <Variable x:TypeArguments="x:String" Name="strBatchNameFrom" />
+              <Variable x:TypeArguments="x:String" Name="strLine" />
+              <Variable x:TypeArguments="x:String" Name="strAccount" />
+              <Variable x:TypeArguments="x:String" Name="strDebit" />
+              <Variable x:TypeArguments="x:String" Name="strCredit" />
+              <Variable x:TypeArguments="x:String" Name="strIndex" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign DisplayName="Assign Multiple Variables to Excel Columns" sap:VirtualizedContainerService.HintSize="717.333333333333,436.666666666667" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strBatchNameFrom]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_BatchNameFrom").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strLine]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("Journal_JE_LINE_NUM").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strAccount]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_AccountingLineTo").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strDebit]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromDr").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strCredit]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromCr").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strIndex]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[dtBatchGRC.Rows.IndexOf(row).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strDescription]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_Config("Journal_Description").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strLedger]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_Config("Journal_DOLLedger").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strCategory]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_FromCategory").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strPeriod]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_PeriodName").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strDefaultEffectiveDate]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_DefaultEffectiveDate").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strCurrency]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row(in_Config("ColName_Currency").ToString).ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <ui:LogMessage DisplayName="Log - Default Effective Date" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[in_Config(&quot;Log_DefaultEffectiveDate&quot;).ToString+ strDefaultEffectiveDate]" />
+            <Assign DisplayName="Convert Default date to Effective date" sap:VirtualizedContainerService.HintSize="717.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[strEffectiveDate]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Convert.ToDateTime(strDefaultEffectiveDate).ToString("dd-MMM-yyyy")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log - Effective Date" sap:VirtualizedContainerService.HintSize="717.333333333333,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[in_Config(&quot;Log_EffectiveDate&quot;).ToString + strEffectiveDate]" />
+            <If Condition="[strIndex=&quot;0&quot;]" DisplayName="If Index is &quot;0&quot;" sap:VirtualizedContainerService.HintSize="717.333333333333,278" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke EnterNewDOLLedgerFields workflow" sap:VirtualizedContainerService.HintSize="337.333333333333,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="WorkFlows\EnterNewDOLLedgerFields.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strLine">[strLine]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strAccount">[strAccount]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strDebit">[strDebit]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strCredit">[strCredit]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strIndex">[strIndex]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strDescription">[strDescription]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strLedger">[strLedger]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strCategory">[strCategory]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strEffectiveDate">[strEffectiveDate]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strCurrency">[strCurrency]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strBatchNameFrom">[strBatchNameFrom]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strPeriod">[strPeriod]</InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </If.Then>
+              <If.Else>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke EnterOtherRows workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="WorkFlows\EnterOtherRows.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strIndex">[strIndex]</InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strAccount">[strAccount]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strCredit">[strCredit]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_strDebit">[strDebit]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachRow>
+    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Save' icon" sap:VirtualizedContainerService.HintSize="793.333333333333,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7bf6b908-1edc-4c0a-aaea-076c57956af1" InformativeScreenshot="f56fca06c5ac82f24771d1170c8e5deb" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java cls='ToolBar' idx='29' role='tool bar' /&gt;&lt;java name='Save' role='push button' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Close'" sap:VirtualizedContainerService.HintSize="793.333333333333,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a097015a-f95d-4d56-b363-e62a5398b007" InformativeScreenshot="668e8c75c02acb9631e6a17b2ad00d5e" Selector="&lt;wnd app='jp2launcher.exe' cls='SunAwtFrame' title='Oracle Applications - EBSDB' /&gt;&lt;java name='Journals (DOL_Ledger) - *' role='internal frame' /&gt;&lt;java cls='ToolBar' role='tool bar' /&gt;&lt;java idx='3' role='push button' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+  </Sequence>
+</Activity>
