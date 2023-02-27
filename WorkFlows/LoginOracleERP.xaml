@@ -89,7 +89,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <av:Point x:Key="ShapeLocation">270,22.6666666666667</av:Point>
         <av:Size x:Key="ShapeSize">60,74.66666666666667</av:Size>
-        <av:PointCollection x:Key="ConnectorLocation">300,97.33333333333337 300,127.33333333333337 309,127.33333333333337 309,143.666666666667</av:PointCollection>
+        <av:PointCollection x:Key="ConnectorLocation">300,97.33333333333337 300,143.666666666667</av:PointCollection>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
@@ -102,7 +102,7 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <av:Point x:Key="ShapeLocation">250,256.666666666667</av:Point>
           <av:Size x:Key="ShapeSize">100,86.66666666666667</av:Size>
-          <av:PointCollection x:Key="TrueConnector">250,300 120,300 120,483.666666666667</av:PointCollection>
+          <av:PointCollection x:Key="TrueConnector">250,300.00000000000034 120,300.00000000000034 120,483.666666666667</av:PointCollection>
           <x:String x:Key="FalseLabel">SiteNotSecurePage</x:String>
           <av:PointCollection x:Key="FalseConnector">350,300 470,300 470,483.666666666667</av:PointCollection>
           <x:String x:Key="TrueLabel">LoginPage</x:String>
@@ -134,7 +134,7 @@
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">370,483.666666666667</av:Point>
               <av:Size x:Key="ShapeSize">200,54</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">370,510 220,510</av:PointCollection>
+              <av:PointCollection x:Key="ConnectorLocation">370,510.666666666667 220,510.666666666667</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SiteNotSecurePage" sap:VirtualizedContainerService.HintSize="200,54" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="WorkFlows\SiteNotSecurePage.xaml">
@@ -157,8 +157,8 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">200,143.666666666667</av:Point>
-          <av:Size x:Key="ShapeSize">218,54</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">309,197.666666666667 309,227.666666666667 300,227.666666666667 300,256.666666666667</av:PointCollection>
+          <av:Size x:Key="ShapeSize">200,54</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,197.666666666667 300,256.666666666667</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Parallel DisplayName="Look for Login Page and Site Not Secure Page" sap:VirtualizedContainerService.HintSize="1217.3333333333333,896" sap2010:WorkflowViewState.IdRef="Parallel_1">
@@ -178,7 +178,7 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser - LoginPage" sap:VirtualizedContainerService.HintSize="434,254.66666666666666" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="23ba058654b2700c2ac2c26a112ee66e" Selector="&lt;html app='msedge.exe' /&gt;">
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser - LoginPage" sap:VirtualizedContainerService.HintSize="434,254.66666666666666" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="9127b3d3061d6eb78fba9f0b0d33ea80" Selector="&lt;html app='msedge.exe' /&gt;">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -186,7 +186,7 @@
                 </ActivityAction.Argument>
                 <ui:UiElementExists DisplayName="Element Exists - LoginPage" Exists="[blnLoginPageDisplayed]" sap:VirtualizedContainerService.HintSize="334,107.33333333333333" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
                   <ui:UiElementExists.Target>
-                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="695b3e1f-bbec-4360-b404-c49860e9909d" InformativeScreenshot="9363c9e794c49ed37a2c895af0c4674d" Selector="&lt;webctrl tag='INPUT' /&gt;" TimeoutMS="[CInt(in_Config(&quot;TimeOut_LoginBeforeUnsecurePage&quot;).ToString)]">
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="695b3e1f-bbec-4360-b404-c49860e9909d" InformativeScreenshot="edb33dded267524cf7218cb56724740a" Selector="&lt;webctrl tag='INPUT' /&gt;" TimeoutMS="[CInt(in_Config(&quot;TimeOut_LoginBeforeUnsecurePage&quot;).ToString)]">
                       <ui:Target.WaitForReady>
                         <InArgument x:TypeArguments="ui:WaitForReady" />
                       </ui:Target.WaitForReady>
@@ -228,7 +228,7 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser - SiteNotSecurePage" sap:VirtualizedContainerService.HintSize="434,254.66666666666666" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="23ba058654b2700c2ac2c26a112ee66e" Selector="&lt;html app='msedge.exe' /&gt;">
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser - SiteNotSecurePage" sap:VirtualizedContainerService.HintSize="434,254.66666666666666" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="af428339fa86a7b4106291c342df2ec3" Selector="&lt;html app='msedge.exe' /&gt;">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -236,7 +236,7 @@
                 </ActivityAction.Argument>
                 <ui:UiElementExists DisplayName="Element Exists - SiteNotSecure Page" Exists="[blnSiteNotSecurePageDisplayed]" sap:VirtualizedContainerService.HintSize="334,107.33333333333333" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
                   <ui:UiElementExists.Target>
-                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0dcc3bbb-988b-429a-b6c6-f4b67cdd0a86" InformativeScreenshot="a8687c9d1eba5537452c45c0930a1781" Selector="&lt;html app='msedge.exe' title='This site isn’t secure' /&gt;" TimeoutMS="[CInt(in_Config(&quot;TimeOut_UnsecurePage&quot;).ToString)]">
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0dcc3bbb-988b-429a-b6c6-f4b67cdd0a86" InformativeScreenshot="69ee5a669ec83b6c7051e38160dfec26" Selector="&lt;html app='msedge.exe' title='This site isn’t secure' /&gt;" TimeoutMS="[CInt(in_Config(&quot;TimeOut_UnsecurePage&quot;).ToString)]">
                       <ui:Target.WaitForReady>
                         <InArgument x:TypeArguments="ui:WaitForReady" />
                       </ui:Target.WaitForReady>
